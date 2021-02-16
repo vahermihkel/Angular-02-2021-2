@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Võetud google fonts lehelt - 'select this style' - @import  */
+@import url("https://fonts.googleapis.com/css2?family=Mukta&display=swap");
+
+/* Angular paneb automaatselt margin: 8px. kui on 0, siis ei pea px taha kirjutama */
+body {
+  margin: 0;
+}
+
+/* Tärn tähendab kõigele (h1,h2,h3,div,p.....) */
+* {
+  font-family: "Mukta", sans-serif;
+}

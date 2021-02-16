@@ -1,0 +1,22 @@
+.navbar {
+  background-color: coral;
+  height: 100px;
+}
+
+/* space img ja navbar vahel tähendab selle sees */
+/* paremale antakse stiili, vasak tähendab selle sees */
+.navbar img {
+  height: 100px;
+  width: 200px;
+}
+
+/* . -- class, # -- id, " " - tääg */
+
+.footer {
+  border-top: 1px solid gray;
+  height: 50px;
+  /* Võtab DOMist välja ja saad positsioneerida */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
