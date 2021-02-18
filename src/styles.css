@@ -11,4 +11,5 @@ body {
 /* Tärn tähendab kõigele (h1,h2,h3,div,p.....) */
 * {
   font-family: "Mukta", sans-serif;
+  outline: none;
 }

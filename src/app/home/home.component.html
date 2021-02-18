@@ -1,0 +1,10 @@
+<p>home works!</p>
+<!-- {{ items | json }} -->
+
+<div class="item" *ngFor="let item of items">
+    <div>{{ item.title }}</div>
+    <div>{{ item.price }}</div>
+    <div>{{ item.category }}</div>
+    <img src="{{ item.imgSrc }}">
+    <div (click)="onAddToCart()">Lisa ostukorvi</div>
+</div>

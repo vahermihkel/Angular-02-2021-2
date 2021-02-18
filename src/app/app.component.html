@@ -1,7 +1,11 @@
 <!-- div.class -->
 <div class="navbar">
   <!-- image-l on ainult üks tääg, alt - alternative text -->
-  <img routerLink="/" src="assets\webshio.svg" />
+  <img routerLink="/" src="assets/webshio.svg" />
+  <div routerLink="cart" class="cart-button">
+    <img src="assets/shopping-cart.svg" />
+    <span>0.00 €</span>
+  </div>
 </div>
 <router-outlet></router-outlet>
 <!-- <h1>Suur header</h1>
@@ -12,7 +16,6 @@
 target-blank tekitab uue tabi lingile vajutades
 <a href="http://www.google.com" target="blank">Mine google-sse</a><br />
 <button>Nupp</button> -->
-<div routerLink="cart">MINE CART LEHELE</div>
 <div class="footer"></div>
 
 <!-- helesinised on HTML atribuudid -->
