@@ -1,1 +1,10 @@
-<p>OLEN OSTUKORVIS</p>
+
+<div class="item" *ngFor="let item of cartItems; let i = index">
+    <!-- string interpolation - kahe loogelise sulu vahel muutuja kasutajale näitamine -->
+    <div>{{ item.title }}</div>
+    <div>{{ item.price }}</div>
+    <div>{{ item.category }}</div>
+    <img src="{{ item.imgSrc }}">
+    <!-- event binding - ümarate sulgude vahel sündmuse kasutusele võtmine -->
+    <div (click)="onDeleteFromCart(i)">X</div>
+</div>

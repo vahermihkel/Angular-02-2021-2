@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../cart/cart.service';
+import { Item } from '../models/item.model';
 
 @Component({
   selector: 'app-home',
@@ -511,13 +513,19 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    console.log("home componendis");
   }
 
-  onAddToCart() {
-    console.log("töötab");
+  onAddToCart(item: Item) {
+    this.cartService.cartItems.push(item);
   }
 }
+
+// string - jutumärkidega väärtus '12.00'
+// number - numriline väärtus 12.00
+// boolean - true/false
+// object/json - {}
+// massiivid-listid - []
+
