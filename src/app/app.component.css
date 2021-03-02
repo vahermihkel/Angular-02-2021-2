@@ -1,48 +1,5 @@
-.navbar {
-  background-color: coral;
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
-}
 
-/* space img ja navbar vahel tähendab selle sees */
-/* paremale antakse stiili, vasak tähendab selle sees */
-.navbar img {
-  height: 100px;
-  width: 200px;
-  cursor: pointer;
-}
-
-.cart-button {
-  background-color: #007cc3;
-  height: 50px;
-  padding: 15px;
-  cursor: pointer;
-}
-
-.cart-button img {
-  height: 40px;
-  width: 40px;
-}
-
-.cart-button span {
-  color: white;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-/* vasakpoolne, mis juhul; parempoolne millele */
-.cart-button:hover span {
-  color: #5e9fc5;
-}
 
 /* . -- class, # -- id, " " - tääg */
 
-.footer {
-  border-top: 1px solid gray;
-  height: 50px;
-  /* Võtab DOMist välja ja saad positsioneerida */
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
+

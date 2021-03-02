@@ -1,3 +1,4 @@
+<div (click)="onEmptyCart()" *ngIf="cartItems.length > 0">Tühjenda ostukorv</div>
 
 <div class="item" *ngFor="let item of cartItems; let i = index">
     <!-- string interpolation - kahe loogelise sulu vahel muutuja kasutajale näitamine -->
@@ -7,4 +8,12 @@
     <img src="{{ item.imgSrc }}">
     <!-- event binding - ümarate sulgude vahel sündmuse kasutusele võtmine -->
     <div (click)="onDeleteFromCart(i)">X</div>
+</div>
+
+
+<div class="sum-of-cart" *ngIf="cartItems.length > 0">SUMMA: {{ sumOfCart.toFixed(2) }} €</div>
+
+<div class="empty-cart" *ngIf="cartItems.length == 0">
+    <img src="" alt="">
+    <div>Ostukorv on tühi</div>
 </div>

@@ -5,7 +5,7 @@ export class Item {
         public title: string,
         public price: number,
         public category: string
-    ) {}
+    ) { }
 
     // pangakonto: saab võtta ja lisada, aga mitte otse väärtust panna (get ja set funktsiooni kaudu)
     // private on selleks, et keegi väljaspool funktsiooni seda üle ei kirjutaks suvalise 
