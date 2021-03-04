@@ -1,0 +1,7 @@
+<div class="item" *ngFor="let item of items; let i = index">
+    <div>{{ item.title }}</div>
+    <div>{{ item.price }}</div>
+    <div>{{ item.category }}</div>
+    <button [routerLink]="['/admin/edit-item', i]">Muuda eset</button>
+    <button (click)="onDeleteItem(i)">Kustuta ese</button>
+</div>
