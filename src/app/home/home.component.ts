@@ -15,7 +15,11 @@ export class HomeComponent implements OnInit {
     private itemService: ItemService) { }
 
   ngOnInit(): void {
-    this.items = this.itemService.items;
+    // this.items = this.itemService.items;
+    this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase => {
+      this.items = itemsFromDatabase;
+      this.itemService.items = itemsFromDatabase;
+    });
   }
 
   onAddToCart(item: Item) {

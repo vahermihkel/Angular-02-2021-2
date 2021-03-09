@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,12 +13,11 @@ import { AddItemComponent } from './admin/add-item/add-item.component';
 import { EditItemComponent } from './admin/edit-item/edit-item.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { ViewItemsComponent } from './admin/view-items/view-items.component';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, CartComponent, HomeComponent, NavbarComponent, FooterComponent, AddItemComponent, EditItemComponent, AdminHomeComponent, ViewItemsComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
