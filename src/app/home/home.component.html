@@ -1,7 +1,18 @@
-<p>home works!</p>
-<!-- {{ items | json }} -->
 
-<div class="item" *ngFor="let item of items">
+<!-- {{ items | json }} -->
+<br>
+<div routerLink="admin">ADMIN</div>
+<br><br>    
+
+<div class="filter-bar">
+    <div>Järjesta:</div>
+    <div (click)="onSortPrice()">Hinna alusel</div>
+    <div (click)="onSortTitle()">Tähestiku alusel</div>
+</div>
+
+<br><br>
+
+<div class="item" *ngFor="let item of itemsShown">
     <div>{{ item.title }}</div>
     <div>{{ item.price }}</div>
     <div>{{ item.category }}</div>

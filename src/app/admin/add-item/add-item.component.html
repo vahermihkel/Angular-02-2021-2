@@ -4,7 +4,7 @@
     <label>Pilt</label><br>
     <input placeholder="Toote pilt" type="text" required ngModel name="imgSrc"><br>
     <label>Hind</label><br>
-    <input placeholder="Toote hind" type="text" required ngModel name="price"><br>
+    <input placeholder="Toote hind" type="number" required ngModel name="price"><br>
     <label>Kategooria</label><br>
     <input placeholder="Toote kategooria" type="text" required ngModel name="category"><br>
     <button [disabled]="addItemForm.invalid" type="submit">Sisesta toode</button>

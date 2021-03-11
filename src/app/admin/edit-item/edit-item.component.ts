@@ -35,7 +35,7 @@ export class EditItemComponent implements OnInit {
     if (form.valid) {
       const item = new Item(form.value.imgSrc, form.value.title, form.value.price, form.value.category);
       this.itemService.items[this.id] = item;
-      this.itemService.saveItemsToDatabase(this.itemService.items);
+      this.itemService.saveItemsToDatabase();
       this.router.navigateByUrl("/admin/view-items");
     }
     //  else {
