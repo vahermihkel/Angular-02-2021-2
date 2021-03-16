@@ -20,10 +20,13 @@ export class HomeComponent implements OnInit {
     // this.items = this.itemService.items;
     // this.itemService.saveItemsToDatabase();
     this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase => {
+      this.itemsOriginal = [];
+      this.itemService.items = [];
       for (const key in itemsFromDatabase) {
         const element = itemsFromDatabase[key];
         this.itemsOriginal.push(element);
         this.itemsShown = this.itemsOriginal.slice();
+        this.itemService.items.push(element);
       }
       // console.log(itemsFromDatabase);
       // this.items = itemsFromDatabase;

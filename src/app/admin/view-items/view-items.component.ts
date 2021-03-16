@@ -8,7 +8,6 @@ import { ItemService } from 'src/app/services/item.service';
   styleUrls: ['./view-items.component.css']
 })
 export class ViewItemsComponent implements OnInit {
-
   items: Item[] = [];
 
   constructor(private itemService: ItemService) { }
@@ -16,9 +15,12 @@ export class ViewItemsComponent implements OnInit {
   ngOnInit(): void {
     // this.items = this.itemService.items;
     this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase => {
+      this.items = [];
+      this.itemService.items = [];
       for (const key in itemsFromDatabase) {
         const element = itemsFromDatabase[key];
         this.items.push(element);
+        this.itemService.items.push(element);
       }
       // this.items = itemsFromDatabase;
       // this.itemService.items = itemsFromDatabase;
@@ -26,9 +28,12 @@ export class ViewItemsComponent implements OnInit {
   }
 
   onDeleteItem(i: number) {
-    confirm("oled kustutamas!");
-    this.itemService.items.splice(i, 1);
-    // this.itemService.saveItemsToDatabase(this.itemService.items);
+    let isConfirm = confirm("oled kustutamas!");
+    if (isConfirm) {
+      this.itemService.items.splice(i, 1);
+      this.items.splice(i, 1);
+      this.itemService.saveItemsToDatabase();
+    }
   }
 
 }
