@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
 
@@ -10,7 +11,8 @@ import { ItemService } from 'src/app/services/item.service';
 export class ViewItemsComponent implements OnInit {
   items: Item[] = [];
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService,
+    private translate: TranslateService) { }
 
   ngOnInit(): void {
     // this.items = this.itemService.items;
@@ -28,7 +30,7 @@ export class ViewItemsComponent implements OnInit {
   }
 
   onDeleteItem(i: number) {
-    let isConfirm = confirm("oled kustutamas!");
+    let isConfirm = confirm(this.translate.instant("oled kustutamas!"));
     if (isConfirm) {
       this.itemService.items.splice(i, 1);
       this.items.splice(i, 1);
