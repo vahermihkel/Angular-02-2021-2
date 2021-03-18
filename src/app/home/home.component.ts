@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   itemsOriginal: Item[] = [];
   itemsShown: Item[] = [];
   priceSortNumber = 0;
+  // kuupaev = new Date();
 
   constructor(private cartService: CartService,
     private itemService: ItemService) { }
@@ -55,6 +56,14 @@ export class HomeComponent implements OnInit {
   onSortTitle() {
     // titleSortNumber
     this.itemsShown.sort((a, b) => a.title.localeCompare(b.title));
+  }
+
+  onDeleteFromCart(item: Item) {
+    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.title);
+    if (i != -1) {
+      this.cartService.cartItems.splice(i, 1);
+      this.cartService.cartChanged.next(this.cartService.cartItems);
+    }
   }
 
   onAddToCart(item: Item) {

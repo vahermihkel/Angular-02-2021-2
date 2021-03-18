@@ -518,14 +518,17 @@ export class ItemService {
 
   constructor(private http: HttpClient) { }
 
+  // PUT - asendatakse kõik asjad ära andmebaasis selle väärtusega, mis kaasa anname
   saveItemsToDatabase(): void {
     this.http.put(this.url + "items.json", this.items).subscribe();
   }
 
+  // GET - võtab andmebaasist
   getItemsFromDatabase(): Observable<Item[]> {
     return this.http.get<Item[]>(this.url + "items.json");
   }
 
+  // POST - lisatakse väärtus juurde, mis kaasa anname
   addItemToDatabase(item: Item) {
     console.log(item);
     this.http.post(this.url + "items.json", item).subscribe(
