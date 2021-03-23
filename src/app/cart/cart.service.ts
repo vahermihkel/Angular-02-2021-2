@@ -6,8 +6,14 @@ import { Item } from '../models/item.model';
   providedIn: 'root'
 })
 export class CartService {
-  cartItems: Item[] = [];
-  cartChanged = new Subject<Item[]>();
+  // [{title: "PEALKIRI", price: 50, category: "fishing", ...},{title: "TEINE", price: 50,...},{title: "PEALKIRI", price: 49,...}]
+  // [
+  //  {cartItem:{title: "PEALKIRI", price: 50, category: "fishing", ...}, count:12},   ----- nüüd
+  //  {title: "TEINE", price: 50,...},     ------ enne
+  //  {title: "PEALKIRI", price: 49,...}   ------ enne
+  //  ]
+  cartItems: { cartItem: Item, count: number }[] = [];
+  cartChanged = new Subject<{ cartItem: Item, count: number }[]>();
 
   constructor() { }
 

@@ -36,8 +36,17 @@ export class HomeComponent implements OnInit {
       // slice teeb massiivist koopia
       // splice kustutab massiivist elemendi
       // split teeb stringist massiivi
+      // let cartItems = this.cartService.cartItems;
+      // this.itemsShown = this.itemsOriginal.map(item => {
+      //   cartItems.forEach(cartItem => {
+      //     return { ...item, count: cartItem.count }
+      //   })
+      // })
     });
+  }
 
+  onCategoryFilter(category: string) {
+    this.itemsShown = this.itemsOriginal.filter(item => item.category == category)
   }
 
   onSortPrice() {
@@ -59,17 +68,31 @@ export class HomeComponent implements OnInit {
   }
 
   onDeleteFromCart(item: Item) {
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.title);
+    // [{title: "PEALKIRI", price: 50,...},{title: "TEINE", price: 50,...},{title: "PEALKIRI", price: 49,...}]
+    // {title: "PEALKIRI", price: 49,...}
+    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
     if (i != -1) {
-      this.cartService.cartItems.splice(i, 1);
+      if (this.cartService.cartItems[i].count == 1) {
+        this.cartService.cartItems.splice(i, 1);
+      } else {
+        this.cartService.cartItems[i].count -= 1;
+      }
       this.cartService.cartChanged.next(this.cartService.cartItems);
     }
   }
 
   onAddToCart(item: Item) {
-    this.cartService.cartItems.push(item);
+    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
+    if (i == -1) {
+      this.cartService.cartItems.push({ cartItem: item, count: 1 });
+    } else {
+      this.cartService.cartItems[i].count += 1;
+    }
     this.cartService.cartChanged.next(this.cartService.cartItems);
   }
+
+
+
 }
 
 // string - jutumärkidega väärtus '12.00'

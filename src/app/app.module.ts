@@ -19,9 +19,10 @@ import { ViewItemsComponent } from './admin/view-items/view-items.component';
 import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
 import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
 import { ViewComponent } from './item/view/view.component';
+import { UniqueCategoryPipe } from './pipes/unique-category.pipe';
 
 @NgModule({
-  declarations: [AppComponent, CartComponent, HomeComponent, NavbarComponent, FooterComponent, AddItemComponent, EditItemComponent, AdminHomeComponent, ViewItemsComponent, ThousandSeparatorPipe, ShortenTitlePipe, ViewComponent],
+  declarations: [AppComponent, CartComponent, HomeComponent, NavbarComponent, FooterComponent, AddItemComponent, EditItemComponent, AdminHomeComponent, ViewItemsComponent, ThousandSeparatorPipe, ShortenTitlePipe, ViewComponent, UniqueCategoryPipe],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule, TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,

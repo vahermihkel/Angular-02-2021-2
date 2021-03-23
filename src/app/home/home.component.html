@@ -1,10 +1,15 @@
  <!-- {{ kuupaev | date  }} -->
-<!-- {{ kuupaev | date:'fullDate'  }} -->
+<!-- {{ kuupaev | date:'fullDate'  }}  short, medium, full, shortDate, mediumDate, fullDate -->
  <!-- {{ 500000 | currency:'EUR' }}
  {{ 500000 | currency }}
  {{ 0.1 | percent }} -->
+ <!-- uppercase lowercase titlecase -->
 
- <div class="filter-bar">
+<div (click)="onCategoryFilter(category)" *ngFor="let category of itemsOriginal | uniqueCategory">
+  {{ category }}
+</div>
+
+<div class="filter-bar">
     <div class="filter-name">{{ 'sort-text' | translate }}</div>
     <div class="filter-value price" (click)="onSortPrice()">Hinna alusel</div>
     <div class="filter-value title" (click)="onSortTitle()">{{ 'Tähestiku alusel' | translate }}</div>
