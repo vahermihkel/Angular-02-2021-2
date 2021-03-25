@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AutologinService } from 'src/app/auth/autologin.service';
 import { CartService } from 'src/app/cart/cart.service';
 
 @Component({
@@ -9,11 +10,15 @@ import { CartService } from 'src/app/cart/cart.service';
 })
 export class NavbarComponent implements OnInit {
   cartSum = 0;
+  user!: string | undefined;
 
   constructor(private cartService: CartService,
-    private translate: TranslateService) { }
+    private translate: TranslateService,
+    private autologinService: AutologinService) { }
 
   ngOnInit(): void {
+    this.user = this.autologinService.autologin();
+    console.log(this.user)
     this.cartService.cartChanged.subscribe(items => {
       console.log(items);
       this.cartSum = 0;
