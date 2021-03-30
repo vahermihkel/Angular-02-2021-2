@@ -1,6 +1,9 @@
 <div class="navbar">
   <img class="logo" routerLink="/" src="assets\webshio.svg">
-  <div routerLink="/admin" *ngIf="user">ADMINI VAADE</div>
+  <div routerLink="/admin" *ngIf="isLoggedIn">ADMINI VAADE</div>
+  <div (click)="onLogout()" *ngIf="isLoggedIn">LOGI VÄLJA</div>
+  <div routerLink="/login" *ngIf="!isLoggedIn">LOGI SISSE</div>
+  <div routerLink="/signup" *ngIf="!isLoggedIn">REGISTREERU</div>
   <div>
     <button (click)="useLanguage('en')">en</button>
     <button (click)="useLanguage('ee')">ee</button>

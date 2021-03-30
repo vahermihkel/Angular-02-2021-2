@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { CartService } from '../cart/cart.service';
 import { Item } from '../models/item.model';
 import { ItemService } from '../services/item.service';
@@ -12,14 +13,19 @@ export class HomeComponent implements OnInit {
   itemsOriginal: Item[] = [];
   itemsShown: Item[] = [];
   priceSortNumber = 0;
+  cookieValue = "";
   // kuupaev = new Date();
+  cartItems = [];
 
   constructor(private cartService: CartService,
-    private itemService: ItemService) { }
+    private itemService: ItemService,
+    private cookieService: CookieService) { }
 
   ngOnInit(): void {
     // this.items = this.itemService.items;
     // this.itemService.saveItemsToDatabase();
+
+
     this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase => {
       this.itemsOriginal = [];
       this.itemService.items = [];
@@ -78,6 +84,7 @@ export class HomeComponent implements OnInit {
         this.cartService.cartItems[i].count -= 1;
       }
       this.cartService.cartChanged.next(this.cartService.cartItems);
+      this.cookieService.set('Ostukorv', JSON.stringify(this.cartService.cartItems));
     }
   }
 
@@ -89,6 +96,7 @@ export class HomeComponent implements OnInit {
       this.cartService.cartItems[i].count += 1;
     }
     this.cartService.cartChanged.next(this.cartService.cartItems);
+    this.cookieService.set('Ostukorv', JSON.stringify(this.cartService.cartItems));
   }
 
 
