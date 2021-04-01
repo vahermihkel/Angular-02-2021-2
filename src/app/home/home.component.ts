@@ -17,9 +17,9 @@ export class HomeComponent implements OnInit {
   // kuupaev = new Date();
   cartItems = [];
 
-  constructor(private cartService: CartService,
+  constructor(
     private itemService: ItemService,
-    private cookieService: CookieService) { }
+    ) { }
 
   ngOnInit(): void {
     // this.items = this.itemService.items;
@@ -73,31 +73,7 @@ export class HomeComponent implements OnInit {
     this.itemsShown.sort((a, b) => a.title.localeCompare(b.title));
   }
 
-  onDeleteFromCart(item: Item) {
-    // [{title: "PEALKIRI", price: 50,...},{title: "TEINE", price: 50,...},{title: "PEALKIRI", price: 49,...}]
-    // {title: "PEALKIRI", price: 49,...}
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
-    if (i != -1) {
-      if (this.cartService.cartItems[i].count == 1) {
-        this.cartService.cartItems.splice(i, 1);
-      } else {
-        this.cartService.cartItems[i].count -= 1;
-      }
-      this.cartService.cartChanged.next(this.cartService.cartItems);
-      this.cookieService.set('Ostukorv', JSON.stringify(this.cartService.cartItems));
-    }
-  }
-
-  onAddToCart(item: Item) {
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
-    if (i == -1) {
-      this.cartService.cartItems.push({ cartItem: item, count: 1 });
-    } else {
-      this.cartService.cartItems[i].count += 1;
-    }
-    this.cartService.cartChanged.next(this.cartService.cartItems);
-    this.cookieService.set('Ostukorv', JSON.stringify(this.cartService.cartItems));
-  }
+  
 
 
 
