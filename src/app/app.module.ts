@@ -13,17 +13,11 @@ import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './global/navbar/navbar.component';
 import { FooterComponent } from './global/footer/footer.component';
-import { AddItemComponent } from './admin/add-item/add-item.component';
-import { EditItemComponent } from './admin/edit-item/edit-item.component';
-import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
-import { ViewItemsComponent } from './admin/view-items/view-items.component';
-import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
-import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
-import { ViewComponent } from './item/view/view.component';
 import { UniqueCategoryPipe } from './pipes/unique-category.pipe';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import { ItemCardComponent } from './item/item-card/item-card.component';
+import { AdminModule } from './admin/admin.module';
+import { ItemModule } from './item/item.module';
 
 @NgModule({
   declarations: [
@@ -32,32 +26,28 @@ import { ItemCardComponent } from './item/item-card/item-card.component';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    AddItemComponent,
-    EditItemComponent,
-    AdminHomeComponent,
-    ViewItemsComponent,
-    ThousandSeparatorPipe,
-    ShortenTitlePipe,
-    ViewComponent,
     UniqueCategoryPipe,
     LoginComponent,
     SignupComponent,
-    ItemCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule, TranslateModule.forRoot({
+    HttpClientModule,
+    TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })],
+    }),
+    AdminModule,
+    ItemModule
+  ],
   providers: [CookieService],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 

@@ -520,6 +520,7 @@ export class ItemService {
 
   // PUT - asendatakse kõik asjad ära andmebaasis selle väärtusega, mis kaasa anname
   saveItemsToDatabase(): void {
+    // this.items = this.items.map(item => { return { ...item, producer: "EU " + item.producer } });
     this.http.put(this.url + "items.json", this.items).subscribe();
   }
 
