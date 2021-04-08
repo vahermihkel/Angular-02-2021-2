@@ -23,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     AppRoutingModule,
     TranslateModule,
-    ItemModule
+    ItemModule // import, et export alt kätte saada
   ]
 })
 export class AdminModule { }

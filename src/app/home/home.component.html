@@ -5,6 +5,10 @@
  {{ 0.1 | percent }} -->
  <!-- uppercase lowercase titlecase -->
 
+ <app-gallery-carousel></app-gallery-carousel>
+ 
+<br><br>
+
 <div (click)="onCategoryFilter(category)" *ngFor="let category of itemsOriginal | uniqueCategory">
   {{ category }}
 </div>
@@ -16,7 +20,12 @@
 </div>
 
 <div class="items-wrapper">
-    <div class="item" *ngFor="let itemShown of itemsShown; let i = index">
-      <app-item-card [item]="itemShown" [i]="i"></app-item-card>
-    </div>
+    <app-item-card 
+      [item]="itemShown" 
+      [i]="i" 
+      [loggedIn]="isLoggedIn"
+      class="item" 
+      *ngFor="let itemShown of itemsShown | showActiveItems:isLoggedIn; let i = index"
+      (itemActiveChanged)="itemActiveChanged($event)">
+    </app-item-card>
   </div>

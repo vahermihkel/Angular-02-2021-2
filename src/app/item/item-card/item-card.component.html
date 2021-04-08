@@ -1,10 +1,23 @@
-<img routerLink="view/{{i}}" src="{{ item.imgSrc }}">
-<div class="add-to-cart-button-wrapper">
-  <div class="add-to-cart-button">  
-    <span (click)="onDeleteFromCart(item)">-</span>
-    <span>_kogus_</span>
-    <span (click)="onAddToCart(item)">+</span>
+<span class="admin-buttons" *ngIf="isLoggedIn">
+  <span [ngClass]="{'is-active': item.isActive, 'not-active': !item.isActive}" (click)="onItemActive()">
+    <span *ngIf="!item.isActive;else active">Aktiivseks</span>
+    <ng-template #active>Mitteaktiivseks</ng-template>
+  </span>
+  <span [routerLink]="['/admin/edit-item', i]">Muuda</span>
+</span>
+
+<!-- <span *ngIf="true">Aktiivseks</span>
+<span *ngIf="!true">Mitteaktiivseks</span> -->
+
+<span [ngClass]="{'item-grayed': !item.isActive}">
+  <img routerLink="view/{{i}}" src="{{ item.imgSrc }}">
+  <div class="add-to-cart-button-wrapper">
+    <div class="add-to-cart-button" *ngIf="item.isActive">  
+      <span (click)="onDeleteFromCart(item)">-</span>
+      <span>_kogus_</span>
+      <span (click)="onAddToCart(item)">+</span>
+    </div>
   </div>
-</div>
-<div class="item-title">{{ item.title | translate | shortenTitle:5 }}</div>
-<div class="item-price">{{ item.price | thousandSeparator }} €</div>
+  <div class="item-title">{{ item.title | translate | shortenTitle:5 }}</div>
+  <div class="item-price">{{ item.price | thousandSeparator }} €</div>
+</span>

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,7 +17,8 @@ export class EditItemComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     private itemService: ItemService,
-    private router: Router) { }
+    private router: Router,
+    private location: Location) { }
 
   ngOnInit(): void {
     this.id = (Number)(this.activatedRoute.snapshot.paramMap.get('itemId'));
@@ -28,22 +30,29 @@ export class EditItemComponent implements OnInit {
       imgSrc: new FormControl(this.item.imgSrc),
       category: new FormControl(this.item.category),
       barcode: new FormControl(this.item.barcode),
-      producer: new FormControl(this.item.producer),
-      description: new FormControl(this.item.description),
+      producer: new FormControl(this.item.producer), // vasakpoolne sama mis HTMLis vormis formControlName=""
+      description: new FormControl(this.item.description), // (this.item.----)      sama mis modelis
+      isActive: new FormControl(this.item.isActive),
     })
+  }
+
+  onBack() {
+    // this.router.navigateByUrl("/admin/view-items");
+    this.location.back();
   }
 
   onSubmit(form: FormGroup) {
     console.log(form);
     if (form.valid) {
       const item = new Item(
-        form.value.imgSrc,
+        form.value.imgSrc, // sama mis HTMLis vormis formControlName=""
         form.value.title,
         form.value.price,
         form.value.category,
         form.value.barcode,
         form.value.producer,
-        form.value.description);
+        form.value.description,
+        form.value.isActive);
       this.itemService.items[this.id] = item;
       this.itemService.saveItemsToDatabase();
       setTimeout(() => { this.router.navigateByUrl("/admin/view-items") }, 200)

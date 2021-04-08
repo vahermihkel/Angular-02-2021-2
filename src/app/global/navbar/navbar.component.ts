@@ -28,13 +28,13 @@ export class NavbarComponent implements OnInit {
     // console.log(typeof cookieValue);
     // console.log(typeof JSON.parse(cookieValue));
 
-    this.cartService.cartItems = JSON.parse(cookieValue) ?? [];
+    // this.cartService.cartItems = JSON.parse(cookieValue) ?? [];
 
-    // if (cookieValue == "") {
-    //   this.cartService.cartItems = [];
-    // } else {
-    //   this.cartService.cartItems = JSON.parse(cookieValue);
-    // }
+    if (cookieValue == "") {
+      this.cartService.cartItems = [];
+    } else {
+      this.cartService.cartItems = JSON.parse(cookieValue);
+    }
 
 
     this.user = this.autologinService.autologin();
