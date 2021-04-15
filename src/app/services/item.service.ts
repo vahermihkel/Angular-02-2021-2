@@ -521,7 +521,13 @@ export class ItemService {
   // PUT - asendatakse kõik asjad ära andmebaasis selle väärtusega, mis kaasa anname
   saveItemsToDatabase(): void {
     // this.items = this.items.map(item => { return { ...item, producer: "EU " + item.producer } });
+    // this.items = this.items.map(item => ({ ...item, barcode: this.getRandomNumber() }));
+    // console.log(this.items);
     this.http.put(this.url + "items.json", this.items).subscribe();
+  }
+
+  getRandomNumber() {
+    return Math.floor((Math.random() * 99999999 - 10000000) + 10000000)
   }
 
   // GET - võtab andmebaasist

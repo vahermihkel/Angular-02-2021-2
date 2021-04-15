@@ -13,7 +13,7 @@ export class ItemCardComponent implements OnInit {
   @Input() item!: Item;
   @Input() i!: number; // [SIIN]="muutuja" - info lapsele
   @Input('loggedIn') isLoggedIn!: boolean;
-  @Output() itemActiveChanged = new EventEmitter(); // parentis (SIIN)="funktsioon()" sündmus parentile
+  @Output() itemActiveChanged = new EventEmitter; // parentis (SIIN)="funktsioon()" sündmus parentile
 
   constructor(private cartService: CartService,
     private cookieService: CookieService) { }

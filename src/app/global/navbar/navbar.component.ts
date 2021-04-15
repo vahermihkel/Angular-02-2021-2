@@ -24,18 +24,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     let cookieValue = this.cookieService.get('Ostukorv');
-
-    // console.log(typeof cookieValue);
-    // console.log(typeof JSON.parse(cookieValue));
-
-    // this.cartService.cartItems = JSON.parse(cookieValue) ?? [];
-
-    if (cookieValue == "") {
-      this.cartService.cartItems = [];
-    } else {
-      this.cartService.cartItems = JSON.parse(cookieValue);
-    }
-
+    this.cartService.cartItems = cookieValue == "" ? [] : JSON.parse(cookieValue);
 
     this.user = this.autologinService.autologin();
     this.autologinService.isLoggedIn.subscribe(loggedIn => {
@@ -43,14 +32,7 @@ export class NavbarComponent implements OnInit {
     })
     this.isLoggedIn = this.user ? true : false;
 
-    // if (this.user) {
-    //   this.isLoggedIn = true;
-    // } else {
-    //   this.isLoggedIn = false;
-    // }
-
     this.calculateSumOfCart(this.cartService.cartItems);
-
     this.cartService.cartChanged.subscribe(items => {
       this.calculateSumOfCart(items);
     });

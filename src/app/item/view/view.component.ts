@@ -20,10 +20,10 @@ export class ViewComponent implements OnInit {
 
   ngOnInit(): void {
     let id = Number(this.route.snapshot.paramMap.get('itemId'));
-    console.log(this.route.snapshot.paramMap);
-    console.log(id);
-    this.item = this.itemService.items[id];
-    console.log(this.item)
+    let item = this.itemService.items.find(item => item.barcode == id);
+    if (item) {
+      this.item = item;
+    }
   }
 
   // stringist numbriks --- Number("123")    (Number)("2312321")

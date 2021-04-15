@@ -10,7 +10,7 @@
 <span *ngIf="!true">Mitteaktiivseks</span> -->
 
 <span [ngClass]="{'item-grayed': !item.isActive}">
-  <img routerLink="view/{{i}}" src="{{ item.imgSrc }}">
+  <img routerLink="view/{{item.barcode}}" src="{{ item.imgSrc }}">
   <div class="add-to-cart-button-wrapper">
     <div class="add-to-cart-button" *ngIf="item.isActive">  
       <span (click)="onDeleteFromCart(item)"><img src="assets/minus.svg"></span>
