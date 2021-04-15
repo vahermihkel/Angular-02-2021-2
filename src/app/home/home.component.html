@@ -4,22 +4,25 @@
  {{ 500000 | currency }}
  {{ 0.1 | percent }} -->
  <!-- uppercase lowercase titlecase -->
-
- <app-gallery-carousel></app-gallery-carousel>
  
 <br><br>
 
-<div (click)="onCategoryFilter(category)" *ngFor="let category of itemsOriginal | uniqueCategory">
-  {{ category }}
+<div class="sidenav">
+  <div (click)="onCategoryFilter(category)" 
+    *ngFor="let category of itemsOriginal | showActiveItems:isLoggedIn | uniqueCategory">
+    {{ category }}
+  </div>
 </div>
 
-<div class="filter-bar">
-    <div class="filter-name">{{ 'sort-text' | translate }}</div>
-    <div class="filter-value price" (click)="onSortPrice()">Hinna alusel</div>
-    <div class="filter-value title" (click)="onSortTitle()">{{ 'Tähestiku alusel' | translate }}</div>
-</div>
+<div class="main">
+  <app-gallery-carousel></app-gallery-carousel>
+  <div class="filter-bar">
+      <div class="filter-name">{{ 'sort-text' | translate }}</div>
+      <div class="filter-value price" (click)="onSortPrice()">Hinna alusel</div>
+      <div class="filter-value title" (click)="onSortTitle()">{{ 'Tähestiku alusel' | translate }}</div>
+  </div>
 
-<div class="items-wrapper">
+  <div class="items-wrapper">
     <app-item-card 
       [item]="itemShown" 
       [i]="i" 
@@ -29,3 +32,4 @@
       (itemActiveChanged)="itemActiveChanged($event)">
     </app-item-card>
   </div>
+</div>

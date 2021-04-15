@@ -2,16 +2,16 @@
 
 <div class="items-wrapper">
 	<div class="item" *ngFor="let item of cartItems; let i = index">
-		<img src="{{ item.cartItem.imgSrc }}">
-		<div class="add-to-cart-button">  
-			<span (click)="onDeleteOneFromCart(item.cartItem)">-</span>
-			<span>{{ item.count }} tk</span>
-			<span (click)="onAddToCart(item.cartItem)">+</span>
-		</div>
-		<div><b>{{ item.count * item.cartItem.price | thousandSeparator }} €</b></div>
+		<img class="item-img" src="{{ item.cartItem.imgSrc }}">
 		<div class="item-title">{{ item.cartItem.title }}</div>
 		<div class="item-price">{{ item.cartItem.price | thousandSeparator }} €</div>
-		<img (click)="onDeleteAllFromCart(i)" class="delete-from-cart-button" src="assets/bin.svg" alt="">
+		<div class="add-to-cart-button">  
+			<span (click)="onDeleteOneFromCart(item.cartItem)"><img src="assets/minus.svg"></span>
+			<div>{{ item.count }} tk</div>
+			<span (click)="onAddToCart(item.cartItem)"><img src="assets/plus.svg"></span>
+		</div>
+		<div class="item-price"><b>{{ item.count * item.cartItem.price | thousandSeparator }} €</b></div>
+		<img class="delete-from-cart-button" (click)="onDeleteAllFromCart(i)" src="assets/bin.svg" alt="">
 	</div>
 </div>
 

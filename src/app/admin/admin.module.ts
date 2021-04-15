@@ -9,6 +9,8 @@ import { AppRoutingModule } from '../app-routing.module';
 import { ItemModule } from '../item/item.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { CarouselSettingsComponent } from './carousel-settings/carousel-settings.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
+import { ViewCategoriesComponent } from './category/view-categories/view-categories.component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { CarouselSettingsComponent } from './carousel-settings/carousel-settings
     AdminHomeComponent,
     ViewItemsComponent,
     CarouselSettingsComponent,
+    AddCategoryComponent,
+    ViewCategoriesComponent,
   ],
   imports: [
     CommonModule,

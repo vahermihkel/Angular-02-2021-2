@@ -13,9 +13,9 @@
   <img routerLink="view/{{i}}" src="{{ item.imgSrc }}">
   <div class="add-to-cart-button-wrapper">
     <div class="add-to-cart-button" *ngIf="item.isActive">  
-      <span (click)="onDeleteFromCart(item)">-</span>
+      <span (click)="onDeleteFromCart(item)"><img src="assets/minus.svg"></span>
       <span>_kogus_</span>
-      <span (click)="onAddToCart(item)">+</span>
+      <span (click)="onAddToCart(item)"><img src="assets/plus.svg"></span>
     </div>
   </div>
   <div class="item-title">{{ item.title | translate | shortenTitle:5 }}</div>
