@@ -15,7 +15,6 @@ export class ViewItemsComponent implements OnInit {
     private translate: TranslateService) { }
 
   ngOnInit(): void {
-    // this.items = this.itemService.items;
     this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase => {
       this.items = [];
       this.itemService.items = [];
@@ -24,17 +23,16 @@ export class ViewItemsComponent implements OnInit {
         this.items.push(element);
         this.itemService.items.push(element);
       }
-      // this.items = itemsFromDatabase;
-      // this.itemService.items = itemsFromDatabase;
     });
   }
 
-  onDeleteItem(i: number) {
+  onDeleteItem(barcode: number) {
     let isConfirm = confirm(this.translate.instant("oled kustutamas!"));
     if (isConfirm) {
+      let i = this.itemService.items.findIndex(item => item.barcode == barcode);
       this.itemService.items.splice(i, 1);
       this.items.splice(i, 1);
-      this.itemService.saveItemsToDatabase();
+      this.itemService.saveItemsToDatabase().subscribe();
     }
   }
 

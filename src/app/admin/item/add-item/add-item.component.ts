@@ -10,7 +10,10 @@ import { CategoryService } from '../../category/category.service';
   styleUrls: ['./add-item.component.css']
 })
 export class AddItemComponent implements OnInit {
-  categories: {categoryName: string}[] = [];
+  categories: { categoryName: string }[] = [];
+  items: Item[] = [];
+  barcode!: number;
+  barcodeUnique = true;
 
   constructor(private itemService: ItemService,
     private categoryService: CategoryService) { }
@@ -19,9 +22,31 @@ export class AddItemComponent implements OnInit {
     this.categoryService.getCategoriesFromDatabase().subscribe(categoriesFromFb => {
       for (const key in categoriesFromFb) {
         const element = categoriesFromFb[key];
-        this.categories.push({categoryName: element.categoryName});
+        this.categories.push({ categoryName: element.categoryName });
       }
     });
+
+    this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase => {
+      this.items = [];
+      this.itemService.items = [];
+      for (const key in itemsFromDatabase) {
+        const element = itemsFromDatabase[key];
+        this.items.push(element);
+        this.itemService.items.push(element);
+      }
+    });
+  }
+
+  onCheckBarcodeUnique() {
+    let barcodeId = this.items.findIndex(item => item.barcode == this.barcode);
+    this.barcodeUnique = barcodeId == -1 ? true : false;
+
+    // if (barcodeId == -1) {
+    //   this.barcodeUnique = true;
+    // } else {
+    //   this.barcodeUnique = false;
+    // }
+
   }
 
   onSubmit(form: NgForm) {
@@ -38,8 +63,7 @@ export class AddItemComponent implements OnInit {
         true);
       this.itemService.items.push(item);
       // this.itemService.saveItemsToDatabase();
-      this.itemService.addItemToDatabase(item);
-      form.reset();
+      this.itemService.addItemToDatabase(item).subscribe(() => form.reset());
     }
     //  else {
     //   alert("EI tööta");

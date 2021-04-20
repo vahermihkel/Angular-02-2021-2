@@ -519,11 +519,11 @@ export class ItemService {
   constructor(private http: HttpClient) { }
 
   // PUT - asendatakse kõik asjad ära andmebaasis selle väärtusega, mis kaasa anname
-  saveItemsToDatabase(): void {
+  saveItemsToDatabase(): Observable<Object> {
     // this.items = this.items.map(item => { return { ...item, producer: "EU " + item.producer } });
     // this.items = this.items.map(item => ({ ...item, barcode: this.getRandomNumber() }));
     // console.log(this.items);
-    this.http.put(this.url + "items.json", this.items).subscribe();
+    return this.http.put(this.url + "items.json", this.items);
   }
 
   getRandomNumber() {
@@ -538,14 +538,15 @@ export class ItemService {
   // POST - lisatakse väärtus juurde, mis kaasa anname
   addItemToDatabase(item: Item) {
     console.log(item);
-    this.http.post(this.url + "items.json", item).subscribe(
-      // response => {
-      //   console.log(response)
-      // },
-      // error => {
-      //   console.log(error)
-      // }
-    )
+    return this.http.post(this.url + "items.json", item)
+    // .subscribe(
+    // response => {
+    //   console.log(response)
+    // },
+    // error => {
+    //   console.log(error)
+    // }
+    // )
   }
 
 }

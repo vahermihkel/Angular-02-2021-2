@@ -10,8 +10,7 @@ import { Item } from 'src/app/models/item.model';
   styleUrls: ['./item-card.component.css',]
 })
 export class ItemCardComponent implements OnInit {
-  @Input() item!: Item;
-  @Input() i!: number; // [SIIN]="muutuja" - info lapsele
+  @Input() item!: Item; // [SIIN]="muutuja" - info lapsele
   @Input('loggedIn') isLoggedIn!: boolean;
   @Output() itemActiveChanged = new EventEmitter; // parentis (SIIN)="funktsioon()" sündmus parentile
 
