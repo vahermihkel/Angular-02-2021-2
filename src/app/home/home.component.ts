@@ -32,18 +32,20 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     let cookieValue = this.cookieService.get('Ostukorv');
     this.cartItems = cookieValue == "" ? [] : JSON.parse(cookieValue);
+    this.checkIfUserLoggedIn();
+    this.getItemsFromDatabase();
+  }
 
+  checkIfUserLoggedIn() {
     let user = this.autologinService.autologin();
     this.autologinService.isLoggedIn.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
       this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
     })
     this.isLoggedIn = user ? true : false;
+  }
 
-    // this.items = this.itemService.items;
-    // this.itemService.saveItemsToDatabase();
-
-
+  getItemsFromDatabase() {
     this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase => {
       this.itemsOriginal = [];
       this.itemService.items = [];
@@ -53,20 +55,20 @@ export class HomeComponent implements OnInit {
         this.itemsShown = this.itemsOriginal.slice();
         this.itemService.items.push(element);
       }
-      this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
-      // console.log(itemsFromDatabase);
-      // this.items = itemsFromDatabase;
-      // this.itemService.items = itemsFromDatabase;
+      this.addCountToItems();
+      this.itemsShown = this.showActiveItemsPipe.transform(this.itemsOriginal.slice(), this.isLoggedIn);
 
-      // slice teeb massiivist koopia
-      // splice kustutab massiivist elemendi
-      // split teeb stringist massiivi
-      // let cartItems = this.cartService.cartItems;
-      // this.itemsShown = this.itemsOriginal.map(item => {
-      //   cartItems.forEach(cartItem => {
-      //     return { ...item, count: cartItem.count }
-      //   })
-      // })
+    });
+  }
+
+  addCountToItems() {
+    this.itemsOriginal = this.itemsOriginal.map(itemOriginal => {
+      const index = this.cartItems.findIndex(cartItem => cartItem['cartItem']['barcode'] == itemOriginal.barcode);
+      const { count } = index !== -1 ? this.cartItems[index] : { count: 0 };
+      return {
+        ...itemOriginal,
+        count
+      };
     });
   }
 

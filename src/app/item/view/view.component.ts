@@ -12,6 +12,8 @@ import { ItemService } from 'src/app/services/item.service';
 })
 export class ViewComponent implements OnInit {
   item!: Item;
+  items: Item[] = [];
+  cartItems = [];
 
   constructor(private route: ActivatedRoute,
     private itemService: ItemService,
@@ -20,42 +22,43 @@ export class ViewComponent implements OnInit {
 
   ngOnInit(): void {
     let id = Number(this.route.snapshot.paramMap.get('itemId'));
-    let item = this.itemService.items.find(item => item.barcode == id);
-    if (item) {
-      this.item = item;
-    }
+    // let item = this.itemService.items[id];
+
+    this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase => {
+      this.items = [];
+      for (const key in itemsFromDatabase) {
+        const element = itemsFromDatabase[key];
+        this.items.push(element);
+      }
+
+      let cookieValue = this.cookieService.get('Ostukorv');
+      this.cartItems = cookieValue == "" ? [] : JSON.parse(cookieValue);
+      this.items = this.items.map(item => {
+        const index = this.cartItems.findIndex(cartItem => cartItem['cartItem']['barcode'] == item.barcode);
+        const { count } = index !== -1 ? this.cartItems[index] : { count: 0 };
+        return {
+          ...item,
+          count
+        };
+      });
+
+      let item = this.items.find(item => item.barcode == id);
+      if (item) {
+        this.item = item;
+      }
+    });
+
   }
 
-  // stringist numbriks --- Number("123")    (Number)("2312321")
-  // numbrist stringiks --- 123.toString()    312412.toLocaleString('fr')
-
   onDeleteFromCart(item: Item) {
-    // [{title: "PEALKIRI", price: 50,...},{title: "TEINE", price: 50,...},{title: "PEALKIRI", price: 49,...}]
-    // {title: "PEALKIRI", price: 49,...}
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
-    if (i != -1) {
-      if (this.cartService.cartItems[i].count == 1) {
-        this.cartService.cartItems.splice(i, 1);
-      } else {
-        this.cartService.cartItems[i].count -= 1;
-      }
-      this.cartService.cartChanged.next(this.cartService.cartItems);
-      this.cookieService.set('Ostukorv', JSON.stringify(this.cartService.cartItems));
+    let isDeleted = this.cartService.deleteFromCart(item);
+    if (isDeleted) {
+      this.item.count--;
     }
   }
 
   onAddToCart(item: Item) {
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
-    if (i == -1) {
-      this.cartService.cartItems.push({ cartItem: item, count: 1 });
-    } else {
-      this.cartService.cartItems[i].count += 1;
-    }
-    this.cartService.cartChanged.next(this.cartService.cartItems);
-    this.cookieService.set('Ostukorv', JSON.stringify(this.cartService.cartItems));
+    this.cartService.addToCart(item);
+    this.item.count++;
   }
-
-
-
-
 }

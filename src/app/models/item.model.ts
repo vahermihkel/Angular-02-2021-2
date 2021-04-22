@@ -8,7 +8,8 @@ export class Item {
         public barcode: number,
         public producer: string,
         public description: string,
-        public isActive: boolean
+        public isActive: boolean,
+        public count: number
     ) { }
 
     // pangakonto: saab võtta ja lisada, aga mitte otse väärtust panna (get ja set funktsiooni kaudu)

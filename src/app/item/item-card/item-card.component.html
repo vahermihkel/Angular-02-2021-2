@@ -14,7 +14,7 @@
   <div class="add-to-cart-button-wrapper">
     <div class="add-to-cart-button" *ngIf="item.isActive">  
       <span (click)="onDeleteFromCart(item)"><img src="assets/minus.svg"></span>
-      <span>_kogus_</span>
+      <span>{{ item.count }} tk</span>
       <span (click)="onAddToCart(item)"><img src="assets/plus.svg"></span>
     </div>
   </div>

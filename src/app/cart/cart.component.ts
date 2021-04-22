@@ -33,26 +33,12 @@ export class CartComponent implements OnInit {
   }
 
   onDeleteOneFromCart(item: Item) {
-    // [{title: "PEALKIRI", price: 50,...},{title: "TEINE", price: 50,...},{title: "PEALKIRI", price: 49,...}]
-    // {title: "PEALKIRI", price: 49,...}
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
-    if (i != -1) {
-      if (this.cartService.cartItems[i].count == 1) {
-        this.cartService.cartItems.splice(i, 1);
-      } else {
-        this.cartService.cartItems[i].count -= 1;
-      }
-      this.calculateSumOfCart();
-    }
+    this.cartService.deleteFromCart(item);
+    this.calculateSumOfCart();
   }
 
   onAddToCart(item: Item) {
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
-    if (i == -1) {
-      this.cartService.cartItems.push({ cartItem: item, count: 1 });
-    } else {
-      this.cartService.cartItems[i].count += 1;
-    }
+    this.cartService.addToCart(item);
     this.calculateSumOfCart();
   }
 

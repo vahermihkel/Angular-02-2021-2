@@ -26,29 +26,15 @@ export class ItemCardComponent implements OnInit {
   }
 
   onDeleteFromCart(item: Item) {
-    // [{title: "PEALKIRI", price: 50,...},{title: "TEINE", price: 50,...},{title: "PEALKIRI", price: 49,...}]
-    // {title: "PEALKIRI", price: 49,...}
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
-    if (i != -1) {
-      if (this.cartService.cartItems[i].count == 1) {
-        this.cartService.cartItems.splice(i, 1);
-      } else {
-        this.cartService.cartItems[i].count -= 1;
-      }
-      this.cartService.cartChanged.next(this.cartService.cartItems);
-      this.cookieService.set('Ostukorv', JSON.stringify(this.cartService.cartItems));
+    let isDeleted = this.cartService.deleteFromCart(item);
+    if (isDeleted) {
+      this.item.count--;
     }
   }
 
   onAddToCart(item: Item) {
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
-    if (i == -1) {
-      this.cartService.cartItems.push({ cartItem: item, count: 1 });
-    } else {
-      this.cartService.cartItems[i].count += 1;
-    }
-    this.cartService.cartChanged.next(this.cartService.cartItems);
-    this.cookieService.set('Ostukorv', JSON.stringify(this.cartService.cartItems));
+    this.cartService.addToCart(item);
+    this.item.count++;
   }
 
 
